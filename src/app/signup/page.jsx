@@ -23,7 +23,7 @@ const page = () => {
         className="relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0
       md:max-w-md md:px-14"
       >
-        <h1 className="text-4xl font-semibold">Sign In</h1>
+        <h1 className="text-4xl font-semibold">Sign Up</h1>
         <div className="space-y-4">
           <label className="inline-block w-full">
             <input type="email" placeholder="email" className="input" />
@@ -37,13 +37,13 @@ const page = () => {
           type="submit"
           className="w-full rounded bg-[#e50914] py-3 font-semibold"
         >
-          Sign In
+          Sign Up
         </button>
 
         <div className="text-[gray]">
-          New to Netflix?{" "}
-          <Link href="/signup" className="text-white hover:underline">
-            Sign up now
+          Already have an account?{" "}
+          <Link href="/login" className="text-white hover:underline">
+            Sign In
           </Link>
         </div>
       </form>
