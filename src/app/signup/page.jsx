@@ -1,7 +1,26 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState } from "react";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "../firebase/config";
 const page = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [createUserWithEmailAndPassword] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const handleSignUp = async () => {
+    try {
+      const res = await createUserWithEmailAndPassword(email, password);
+      setEmail("");
+      setPassword("");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className="relative flex h-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
       <Image
@@ -26,16 +45,29 @@ const page = () => {
         <h1 className="text-4xl font-semibold">Sign Up</h1>
         <div className="space-y-4">
           <label className="inline-block w-full">
-            <input type="email" placeholder="email" className="input" />
+            <input
+              type="email"
+              placeholder="email"
+              className="input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
           <label className="inline-block w-full">
-            <input type="password" placeholder="password" className="input" />
+            <input
+              type="password"
+              placeholder="password"
+              className="input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
         </div>
 
         <button
           type="submit"
           className="w-full rounded bg-[#e50914] py-3 font-semibold"
+          onClick={handleSignUp}
         >
           Sign Up
         </button>
@@ -43,7 +75,7 @@ const page = () => {
         <div className="text-[gray]">
           Already have an account?{" "}
           <Link href="/login" className="text-white hover:underline">
-            Sign In
+            Sign in now
           </Link>
         </div>
       </form>
