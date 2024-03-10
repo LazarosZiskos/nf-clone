@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [email, setEmail] = useState("");
@@ -12,13 +12,15 @@ const page = () => {
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (e) => {
+    e.preventDefault();
     try {
       const res = await signInWithEmailAndPassword(email, password);
       console.log({ res });
+      sessionStorage.setItem("user", true);
       setEmail("");
       setPassword("");
-      router.push("/signup");
+      router.push("/");
     } catch (e) {
       console.error(e);
     }
