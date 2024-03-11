@@ -1,21 +1,20 @@
 "use client";
-import { auth } from "@/app/firebase/config";
-import { signOut } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
 import { HiBell, HiSearch } from "react-icons/hi";
+import { signOut } from "firebase/auth";
+import { auth } from "@/app/firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const [user] = useAuthState(auth);
+  const [user, setUser] = useState({});
   const router = useRouter();
-  const userSession = sessionStorage.getItem("user");
 
-  if (!user && !userSession) {
+  const logout = () => {
+    signOut(auth);
     router.push("/login");
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,13 +56,7 @@ function Navbar() {
         <HiSearch className="hidden w-6 h-6 sm:block" />
         <p className="hidden lg:block">Kids</p>
         <HiBell className="w-6 h-6" />
-        <button
-          onClick={() => {
-            signOut(auth);
-            sessionStorage.removeItem("user");
-          }}
-          className="navLink text-md"
-        >
+        <button className="navLink text-md" onClick={logout}>
           Log Out
         </button>
       </div>

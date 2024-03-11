@@ -1,29 +1,29 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
 
-  const handleSignIn = async (e) => {
+  const signIn = (e) => {
     e.preventDefault();
-    try {
-      const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
-      sessionStorage.setItem("user", true);
-      setEmail("");
-      setPassword("");
-      router.push("/");
-    } catch (e) {
-      console.error(e);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        console.log(user);
+        setEmail("");
+        setPassword("");
+        router.push("/");
+      })
+      .catch((error) => {
+        setErrorMessage("Email or Password are incorrect");
+        console.log(error);
+      });
   };
 
   return (
@@ -72,14 +72,14 @@ const page = () => {
         <button
           type="submit"
           className="w-full rounded bg-[#e50914] py-3 font-semibold"
-          onClick={handleSignIn}
+          onClick={signIn}
         >
           Sign In
         </button>
 
         <div className="text-[gray]">
           New to Netflix?{" "}
-          <Link href="/" className="text-white hover:underline">
+          <Link href="/signup" className="text-white hover:underline">
             Sign up now
           </Link>
         </div>
@@ -88,4 +88,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;

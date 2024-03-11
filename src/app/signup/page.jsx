@@ -1,26 +1,36 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
-const page = () => {
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
+  useEffect(() => {
+    onAuthStateChanged(auth);
 
-  const handleSignUp = async () => {
-    try {
-      const res = await createUserWithEmailAndPassword(email, password);
-      console.log(res);
-      sessionStorage.setItem("user", true);
-      setEmail("");
-      setPassword("");
-    } catch (e) {
-      console.error(e);
+    if (user) {
+      setUser(user);
     }
+  }, []);
+
+  const registerHandler = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        console.log(user);
+        setEmail("");
+        setPassword("");
+        router.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -69,7 +79,7 @@ const page = () => {
         <button
           type="submit"
           className="w-full rounded bg-[#e50914] py-3 font-semibold"
-          onClick={handleSignUp}
+          onClick={registerHandler}
         >
           Sign Up
         </button>
@@ -85,4 +95,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Register;
