@@ -46,7 +46,7 @@ function Navbar() {
         <HiSearch className="hidden w-6 h-6 sm:block" />
         <p className="hidden lg:block">Kids</p>
         <HiBell className="w-6 h-6" />
-        <UserButton />
+        <UserButton afterSignOutUrl="/sign-in" />
       </div>
     </header>
   );

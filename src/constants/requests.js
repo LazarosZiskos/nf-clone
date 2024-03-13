@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/constants/movie";
+import { BASE_URL } from "./movie";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 

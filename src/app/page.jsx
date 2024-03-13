@@ -1,6 +1,6 @@
-import Banner from "@/components/Banner";
-import Navbar from "@/components/Navbar";
-import Row from "@/components/Row";
+import Banner from "../components/Banner";
+import Navbar from "../components/Navbar";
+import Row from "../components/Row";
 import {
   getTrending,
   getTopRated,
@@ -9,7 +9,7 @@ import {
   getHorror,
   getRomance,
   getDocumentaries,
-} from "@/constants/requests";
+} from "../constants/requests";
 
 export default async function Home() {
   const trending = await getTrending();

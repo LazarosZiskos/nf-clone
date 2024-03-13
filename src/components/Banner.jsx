@@ -1,5 +1,5 @@
 "use client";
-import { BASE_URL, baseUrl } from "@/constants/movie";
+import { BASE_URL, baseUrl } from "../constants/movie";
 import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
