@@ -1,20 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { HiBell, HiSearch } from "react-icons/hi";
-import { signOut } from "firebase/auth";
-import { auth } from "@/app/firebase/config";
-import { onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState({});
-  const router = useRouter();
-
-  const logout = () => {
-    signOut(auth);
-    router.push("/login");
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,9 +46,7 @@ function Navbar() {
         <HiSearch className="hidden w-6 h-6 sm:block" />
         <p className="hidden lg:block">Kids</p>
         <HiBell className="w-6 h-6" />
-        <button className="navLink text-md" onClick={logout}>
-          Log Out
-        </button>
+        <UserButton />
       </div>
     </header>
   );
