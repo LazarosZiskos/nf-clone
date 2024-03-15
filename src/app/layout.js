@@ -9,7 +9,7 @@ export const metadata = {
   description: "Created by N.D. Devs",
 };
 
-const PUBLISHABLE_KEY = process.env.CLERK_PUBLISHABLE_KEY;
+const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 export default function RootLayout({ children }) {
   return (

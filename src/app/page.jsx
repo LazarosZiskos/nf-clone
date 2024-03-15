@@ -1,25 +1,8 @@
 import Banner from "../components/Banner";
 import Navbar from "../components/Navbar";
-import Row from "../components/Row";
-import {
-  getTrending,
-  getTopRated,
-  getAction,
-  getComedies,
-  getHorror,
-  getRomance,
-  getDocumentaries,
-} from "../constants/requests";
+import Hero from "../components/Hero";
 
-export default async function Home() {
-  const trending = await getTrending();
-  const topRated = await getTopRated();
-  const action = await getAction();
-  const comedies = await getComedies();
-  const scary = await getHorror();
-  const romance = await getRomance();
-  const documentaries = await getDocumentaries();
-
+export default function Home() {
   return (
     <main
       className="relative h-screen bg-gradient-to-b
@@ -32,13 +15,7 @@ export default async function Home() {
         <Banner />
       </section>
       <section className="md:space-y-24 pl-4 lg:pl-16">
-        <Row movies={trending} title="Trending Now" />
-        <Row movies={topRated} title="Top Rated" />
-        <Row movies={action} title="Action Thrillers" />
-        <Row movies={comedies} title="Comedies" />
-        <Row movies={scary} title="Scary Movies" />
-        <Row movies={romance} title="Romance Movies" />
-        <Row movies={documentaries} title="Documentaries" />
+        <Hero />
       </section>
     </main>
   );

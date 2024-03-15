@@ -8,7 +8,8 @@ export const getTrending = async () => {
   );
 
   const data = await res.json();
-  return data.results;
+  const trending = data.results;
+  return trending;
 };
 
 export const getTopRated = async () => {
