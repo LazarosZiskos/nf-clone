@@ -2,10 +2,6 @@
 import { AddCircle, CancelRounded, RemoveCircle } from "@mui/icons-material";
 import { BASE_URL } from "../constants/movie";
 import { useEffect, useState } from "react";
-import Modal from "@mui/material/Modal";
-import { IoIosClose } from "react-icons/io";
-
-//<IoIosClose />
 
 const ACCESS_TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -45,7 +41,7 @@ const ModalComponent = ({ movie, closeModal }) => {
   }, [movie]);
 
   return (
-    <div className="fixed top-20 inset-0 z-60 bg-black bg-opacity-95 w-full max-w-2xl mx-auto overflow-hidden overflow-y-scroll scrollbar-hide rounded-xl">
+    <div className="fixed top-20 inset-0 z-100 bg-black bg-opacity-95 w-full max-w-2xl mx-auto overflow-hidden overflow-y-scroll scrollbar-hide rounded-xl">
       <button
         className="absolute top-5 right-5 z-100 cursor-pointer"
         onClick={closeModal}
@@ -56,11 +52,34 @@ const ModalComponent = ({ movie, closeModal }) => {
       </button>
 
       <iframe
-        src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=0&loop=1`}
+        src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&loop=1`}
         className="top-0 left-0 w-full h-3/5"
         loading="lazy"
         allowFullScreen
       />
+      <div className="flex flex-col gap-3 p-6 text-white">
+        <div className="flex justify-between">
+          <div className="flex gap-2">
+            <p className="text-base-bold">Name:</p>
+            <p className="text-base-light">{movie?.title || movie?.name}</p>
+          </div>
+          <div className="flex gap-3">
+            <p className="text-base-bold">Add To List</p>
+            <AddCircle className="cursor-pointer text-pink-1" />
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <p className="text-base-bold">Release Date:</p>
+          <p className="text-base-light">{movie?.release_date}</p>
+        </div>
+
+        <p className="text-base-light">{movie?.overview}</p>
+
+        <div className="flex gap-2">
+          <p className="text-base-bold">Rating:</p>
+          <p className="text-base-light">{movie?.vote_average}</p>
+        </div>
+      </div>
     </div>
   );
 };
