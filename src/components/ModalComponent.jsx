@@ -41,7 +41,7 @@ const ModalComponent = ({ movie, closeModal }) => {
   }, [movie]);
 
   return (
-    <div className="fixed top-20 inset-0 z-100 bg-black bg-opacity-95 w-full max-w-2xl mx-auto overflow-hidden overflow-y-scroll scrollbar-hide rounded-xl">
+    <div className="fixed top-20 inset-0 z-70 bg-black bg-opacity-95 w-full max-w-2xl mx-auto overflow-hidden overflow-y-scroll scrollbar-hide rounded-xl">
       <button
         className="absolute top-5 right-5 z-100 cursor-pointer"
         onClick={closeModal}
@@ -57,7 +57,7 @@ const ModalComponent = ({ movie, closeModal }) => {
         loading="lazy"
         allowFullScreen
       />
-      <div className="flex flex-col gap-3 p-6 text-white">
+      <div className="flex flex-col gap-3 p-6 text-white z-70">
         <div className="flex justify-between">
           <div className="flex gap-2">
             <p className="text-base-bold">Name:</p>

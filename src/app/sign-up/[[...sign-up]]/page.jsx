@@ -57,6 +57,7 @@ const signUp = () => {
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
+      console.log(errors.message);
     }
   };
 

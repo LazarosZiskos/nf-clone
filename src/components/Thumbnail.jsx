@@ -10,7 +10,7 @@ function Thumbnail({ movie }) {
   const closeModal = () => setShowModal(false);
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <div
         className="h-28 min-w-[180px] cursor-pointer duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105"
         onClick={openModal}
